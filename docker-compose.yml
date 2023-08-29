@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:latest
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=dashboard
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - backend
+  
+  server:
+    depends_on:
+      - mysqldb
+    build: ./bezkoder-api
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - 5000:80
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=dashboard
+      - DB_PORT=3306
+      - CLIENT_ORIGIN=http://127.0.0.1:5001
+    networks:
+      - backend
+      - frontend
+
+  client:
+    depends_on:
+      - server
+    build:
+      context: ./client
+      args:
+        - REACT_APP_API_BASE_URL=http://127.0.0.1:8555/api
+    ports:
+      - 8080:8080
+    networks:
+      - frontend
+
+volumes: 
+  db:
+
+networks:
+  backend:
+  frontend:
