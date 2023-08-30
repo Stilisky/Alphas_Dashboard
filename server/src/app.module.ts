@@ -1,3 +1,4 @@
+import { ApiModule } from './externalapi/api.module';
 import { WidgetModule } from './widgets/widget.module';
 import { ServiceModule } from './services/service.module';
 import { TimerModule } from './timers/timer.module';
@@ -9,6 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
+    ApiModule,
     WidgetModule,
     ServiceModule,
     TimerModule,
