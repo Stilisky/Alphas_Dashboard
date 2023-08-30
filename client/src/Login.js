@@ -4,7 +4,7 @@ export const Login = () => {
     const [email,setEmail]  = useState("");
     const [pass, setPass] = useState("");
     return (
-        <section class="bg-gray-50 dark:bg-gray-900 bg-[url('img/aditya-chinchure-ZhQCZjr9fHo-unsplash.jpg')] bg-cover h-full">
+        <section class="bg-gray-50 dark:bg-gray-900 h-full">
             <form action="/login" method="POST">
                 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <div
