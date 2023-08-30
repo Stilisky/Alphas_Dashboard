@@ -2,21 +2,36 @@
 import React, { useState } from 'react';
 
 export const Register = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+    const [formData,setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+    })
     const [error, setError] = useState('');
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(username, email, pass)
+        // fetch('http://localhost:6000/register', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({ formData }),
+        // }).then(response => response.json())
+        // .then(data => console.log(data))
+        // .catch(error => console.error(error));
         try {
-            const response = await fetch('localhost:8000', {
+            const response = await fetch('http://localhost:6000/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, username, pass }),
+                body: JSON.stringify({ formData }),
             });
             if (response.ok) {
                 // Registration successful
@@ -56,18 +71,18 @@ export const Register = () => {
                                                 for="first_name">Username</label>
                                             <input
                                                 class="appearance-none border rounded w-full bg-transparent py-2 px-3 text-white"
-                                                id="username" name="username" type="text" placeholder="Your Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                                id="username" name="username" type="text" placeholder="Your Username"  onChange={handleChange} />
                                         </div>
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-white text-sm font-bold mb-2" for="email">Email</label>
                                         <input class="appearance-none border rounded w-full py-2 px-3 bg-transparent text-white"
-                                            id="email" type="email" name="email" placeholder="Enter a valid email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                            id="email" type="email" name="email" placeholder="Enter a valid email address" onChange={handleChange} />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-white text-sm font-bold mb-2" for="password">Password</label>
                                         <input class="appearance-none border rounded w-full py-2 bg-transparent px-3 text-white"
-                                            id="password" name="password" type="password" placeholder="A secure password" value={pass} onChange={(e) => setPass(e.target.value)} />
+                                            id="password" name="password" type="password" placeholder="A secure password" onChange={handleChange} />
                                         <p class="text-white text-xs mt-1">At least 6 characters</p>
                                         {/* <label class="block text-white text-sm font-bold mt-2 mb-2" for="password">Confirm
                                             Password</label>
