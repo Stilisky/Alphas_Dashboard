@@ -1,8 +1,29 @@
-import React from "react";
-
+//import React from "react";
+import React, { useState, useEffect } from 'react';
 function Grille() {
+  const [apiData, setApiData] = useState([])
+
+  useEffect(() => {
+      fetch('http://localhost:4000/services')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setApiData(data)})
+      .catch(error => console.error('Error fetching API data:', error));
+  }, 
+  [])
+
   return (
     <div>
+      <div>
+            {
+                apiData.map((list, index)=>(
+                    <li key={index}>{list.id} | {list.name}</li>
+
+                ))
+            }
+        </div>
+
       <div class="grid grid-row-4 gap-6  mx-8">
         <div class="line-clamp-3 border-b-4 border-indigo-500 bg-slate-300">
           Service1
