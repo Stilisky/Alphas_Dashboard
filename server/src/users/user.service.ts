@@ -26,6 +26,19 @@ export class UserService {
 //       return user;
 //    }
 
+async toggleUserRole(userId: string): Promise<User> {
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+        throw new NotFoundException('User not found');
+    }
+
+    user.isAdmin = !user.isAdmin; // Inverser le statut d'administrateur
+    await user.save(); // Mettre à jour l'utilisateur dans la base de données
+    return user;
+}
+
+
+
    async updateUser(id:string, newUser: UpdateUserDto) {
       const user = await this.userModel.findByIdAndUpdate(id, newUser)
       return user;

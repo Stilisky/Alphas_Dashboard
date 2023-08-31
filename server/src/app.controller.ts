@@ -9,6 +9,7 @@ import {
   Delete,
   Param,
   Session,
+  Put,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { AppService } from './app.service';
@@ -117,11 +118,32 @@ export class AppController {
     return serv;
   }
 
+  @Put('/promote/:userId')
+  async promoteUser(@Param('userId') userId: string) {
+    try {
+      const updatedUser = await this.userService.toggleUserRole(userId);
+      return updatedUser;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   @Get("/widget/data/:id")
   async widgetdata(@Param("id") id:string) {
     const widget = await this.widgetService.findWidget(id);
     const data = await this.appService.getData(widget);
     return data;
+  }
+
+  @Get("/users/data/:id")
+  async userData(@Param("id") id:string) {
+    const userData = await this.userService.findUserById(id);
+    return userData;
+  }
+
+  @Put('/update/users/data/:id')
+  async updateAccountInfo(@Param('id') id: string, @Body() updateData) {
+    this.userService.updateUser(id, updateData)
   }
 
 }
