@@ -1,11 +1,10 @@
-import UserNavbar from "./userNavbar";
+import Userbar from "./userNavbar";
 import SidebarUser from "./userSideBar";
-// import Sidebar from "./userSideBar";
 
 export function UserDashboard() {
    return (
       <div>
-         {/* <UserNavbar/> */}
+         <Userbar/>
          <SidebarUser/>
       </div>
    )
