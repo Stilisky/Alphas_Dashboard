@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.pos{
+    position: absolute;
+    top: 337px;
+    left: 201px;
+}

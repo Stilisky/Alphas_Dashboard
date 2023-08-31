@@ -1,17 +1,16 @@
-import React from "react";
-//import logo from "./logo.svg";
-//import "./App.css";
+import './App.css';
+import Landing from './components/landing';
+import AdminHome from './admin/page/AdminHome';
+import { Route, Routes } from 'react-router-dom';
+import { UserDashboard } from './components/userdashboard';
 
-import './styles/App.css';
-import Navbar from "./components/navbar";
-import Interface from "./components/interface";
 function App() {
-  
   return (
-    <div className="App">
-     <Navbar />
-     <Interface />
-    </div>
+    <Routes>
+      <Route path='/' element={<Landing />}/>
+      <Route path='/AdminHome' element={<AdminHome />}/>
+      <Route path='/dashboard' element={<UserDashboard />}/>
+    </Routes>
   );
 }
 

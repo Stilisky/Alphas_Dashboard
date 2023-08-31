@@ -1,22 +1,17 @@
 import React from 'react'
-
 const Hero = () => {
-    return (
-        <div>
-            <div class="container px-6 py-16 mx-auto text-center">
-                <div class="max-w-lg mx-auto">
-                    <h1 class="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">Track insights across the web without having to read everything</h1>
-                    <p class="mt-6 text-gray-500 dark:text-gray-300">You tell Feedly AI what’s important to you and it flags the important insights from everywhere, including news sites, blogs, and newsletters</p>
-                    <button class="px-5 py-2 mt-6 text-sm font-medium leading-5 text-center text-white capitalize bg-[#2bb24c] rounded-lg hover:bg-blue-500 lg:mx-0 lg:w-auto focus:outline-none">
-                        Get Started
-                    </button>
-                </div>
-
-                <div class="flex justify-center mt-10">
-                    <img class="object-cover w-full h-96 rounded-xl lg:w-4/5" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" />
-                </div>
-            </div>
+  return (
+    <div class="h-[700px] bg-[url('./img/hero.jpg')] bg-cover">
+      <div class="h-full w-full z-10 bg-[#000000c0]">
+        <div className='container mx-auto h-full flex flex-col items-center justify-center px-5'>
+          <h1 className='text-5xl text-center text-white mx-10'><strong>Track insights <span className='text-[#2bb24c]'>across the web </span> without<br />  having to read everything</strong></h1>
+          <h2 className='text-1xl text-center text-white mx-16 mt-3'>You tell Feedly AI what’s important to you insights from everywhere,<br /> including news sites, blogs, and newsletters</h2>
+          <button type="button" className="text-white mt-3 text-xl border border-[#2bb24c] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none hover:bg-[#2bb24c] font-medium rounded-lg px-5 py-2.5 text-center mr-2 mb-2">
+            Get started Now
+          </button>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 export default Hero
