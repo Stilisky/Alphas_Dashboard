@@ -19,16 +19,16 @@ export default function Userbar() {
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
           <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <a href="#" class="block py-2 pl-3 pr-4 text-white bg-[#2bb24c] rounded md:bg-transparent md:text-[#2bb24c] md:p-0 md:dark:text-[#2bb24c]" aria-current="page">Home</a>
+              <a href="#y" class="block py-2 pl-3 pr-4 text-white bg-[#2bb24c] rounded md:bg-transparent md:text-[#2bb24c] md:p-0 md:dark:text-[#2bb24c]" aria-current="page">Home</a>
             </li>
             <li>
-              <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-[#2bb24c] md:hover:bg-transparent md:hover:text-[#2bb24c] md:p-0 md:dark:hover:text-[#2bb24c] dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</a>
+              <a href="#n" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-[#2bb24c] md:hover:bg-transparent md:hover:text-[#2bb24c] md:p-0 md:dark:hover:text-[#2bb24c] dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</a>
             </li>
             <li>
-              <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-[#2bb24c] md:hover:bg-transparent md:hover:text-[#2bb24c] md:p-0 md:dark:hover:text-[#2bb24c] dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Setting</a>
+              <a href="#l" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-[#2bb24c] md:hover:bg-transparent md:hover:text-[#2bb24c] md:p-0 md:dark:hover:text-[#2bb24c] dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Setting</a>
             </li>
             <li>
-              <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-[#2bb24c] md:hover:bg-transparent md:hover:text-[#2bb24c] md:p-0 md:dark:hover:text-[#2bb24c] dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+              <a href="#m" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-[#2bb24c] md:hover:bg-transparent md:hover:text-[#2bb24c] md:p-0 md:dark:hover:text-[#2bb24c] dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
             </li>
           </ul>
         </div>
