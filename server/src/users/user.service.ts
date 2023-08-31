@@ -23,6 +23,7 @@ export class UserService {
                 password: hashedPassword,
             });
             await newUser.save();
+            console.log(newUser);
             return newUser;
         } catch (error) {
             // Handle hashing error or database operation error here
@@ -32,14 +33,14 @@ export class UserService {
 
     async checkExistingUser(email: string, username: string) {
         const existingUser = await this.userModel
-            .findOne({ $or: [{ email }, { username }] })
+            .findOne({ $or: [{ username },{ email }] })
             .exec();
         if (existingUser) {
-            if (existingUser.email === email) {
-                throw new ConflictException('Email is already taken');
-            }
             if (existingUser.username === username) {
                 throw new ConflictException('Username is already taken');
+            }
+            if (existingUser.email === email) {
+                throw new ConflictException('Email is already taken');
             }
         }
     }
@@ -56,14 +57,14 @@ export class UserService {
         }
 
         // Check username format using regex (alphanumeric characters only)
-        const usernameRegex = /^[a-zA-Z0-9]+$/;
+        const usernameRegex = /^[a-zA-Z0-9\-']+$/;
         if (!usernameRegex.test(username)) {
             throw new BadRequestException(
                 'Invalid username format. Use only alphanumeric characters.',
             );
         }
 
-        await this.checkExistingUser(email, username);
+        await this.checkExistingUser(email, username);        
 
         return await this.createUser(createUserDto);
     }
