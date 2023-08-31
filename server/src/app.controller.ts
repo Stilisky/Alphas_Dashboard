@@ -21,7 +21,12 @@ export class AppController {
 
   @Get()
   async getHello() {
-    return await this.apiService.getLastFiveRemoteJobs();
+    return await this.apiService.dateAndTime();
+  }
+
+  @Get("/widgets")
+  async getWidgets() {
+    return await this.widgetService.findWidgets();
   }
 
   @Post("/widgets")

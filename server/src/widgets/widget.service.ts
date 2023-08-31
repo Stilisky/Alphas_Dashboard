@@ -9,6 +9,11 @@ import { WidgetCreateDto } from './dto/createWidgetDto';
 export class WidgetService {
    constructor(@InjectModel(Widget.name) private readonly widgetModel: Model<Widget>) {}
 
+   async findWidgets() {
+      const widgets = await this.widgetModel.find()
+      return widgets
+   }
+
    async findWidget(id) {
       const widget = (await this.widgetModel.findById(id).exec()).populate("timer")
       return widget
