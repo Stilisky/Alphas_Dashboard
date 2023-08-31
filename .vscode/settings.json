@@ -1,5 +1,8 @@
 {
    "[javascript]": {
       "editor.defaultFormatter": "Jota0222.multi-formatter"
+   },
+   "[javascriptreact]": {
+      "editor.defaultFormatter": null
    }
 }
