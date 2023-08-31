@@ -98,6 +98,13 @@ export class AppController {
     return services;
   }
 
+
+  @Get('/allusers')
+  async getUsers() {
+    const Allusers = await this.userService.findAllUsers()
+    return Allusers;
+  }
+
   @Post("/services")
   async createService(@Body() newServ) {
     const serv = await this.serviceService.createUserService(newServ)
