@@ -4,9 +4,13 @@ import {
   Controller,
   HttpException,
   Post,
+  Get,
   Res,
+  Delete,
+  Param,
   Session,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { AppService } from './app.service';
 import { ApiService } from './externalapi/api.service';
 import { UserService } from './users/user.service';
@@ -14,6 +18,7 @@ import { WidgetService } from './widgets/widget.service';
 import { TimerService } from './timers/timer.service';
 import { ServiceService } from './services/service.service';
 import { WidgetCreateDto } from './widgets/dto/createWidgetDto';
+import { CreateUserDto } from './users/dto/createUser.dto';
 
 @Controller()
 export class AppController {
@@ -33,7 +38,7 @@ export class AppController {
   ) {
     try {
       const newUser = await this.userService.validateCreation(createUserDto);
-      return res.json({ user: newUser });
+      return res.json({ user: newUser })
     } catch (error) {
       const errorMessage =
         error instanceof HttpException
@@ -101,7 +106,7 @@ export class AppController {
 
   @Post("/users")
   async createUser(@Body() newServ) {
-    const serv = await this.userService.createUSer(newServ)
+    const serv = await this.userService.createUser(newServ)
     return serv;
   }
 
