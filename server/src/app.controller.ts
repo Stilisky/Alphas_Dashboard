@@ -1,5 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  Post,
+  Res,
+  Session,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { ApiService } from './externalapi/api.service';
 import { UserService } from './users/user.service';
@@ -18,6 +25,38 @@ export class AppController {
     private readonly timerService: TimerService,
     private readonly serviceService: ServiceService,
   ) {}
+
+  @Post('/register')
+  async registerUser(
+    @Body() createUserDto: CreateUserDto,
+    @Res() res: Response,
+  ) {
+    try {
+      const newUser = await this.userService.validateCreation(createUserDto);
+      return res.json({ user: newUser });
+    } catch (error) {
+      const errorMessage =
+        error instanceof HttpException
+          ? error.getResponse()
+          : 'An error occurred';
+
+      return res.status(error.getStatus()).json({ message: errorMessage });
+    }
+  }
+
+  @Post('/login')
+  async loginUser(@Session() session, @Body() existingUser: CreateUserDto) {
+    const { user } = await this.userService.validateUser(
+      existingUser.email,
+      existingUser.password,
+    );
+    if (user) {
+      session['userId'] = user._id;
+      session['name'] = user.username;
+      session['email'] = user.email;
+      return { user };
+    }
+  }
 
   @Get()
   async getHello() {
