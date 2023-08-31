@@ -68,7 +68,7 @@ export const Register = () => {
                                     </a>
                                 </div>
                                 <div class="py-4 px-8">
-                                    {error && <p className="text-red-500 text-sm">{error.message}</p>}
+                                    {error && <p className="text-red-500 text-center text-sm">{error.message}</p>}
                                     {!passwordsMatch && <p className="text-red-500 text-sm">Passwords do not match</p>}
                                     <div class="mb-4">
                                         <label class="block text-white text-sm font-bold mb-2"
@@ -119,4 +119,3 @@ export const Register = () => {
         </section>
     );
 }
-//};

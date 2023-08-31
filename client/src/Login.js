@@ -1,11 +1,52 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-    const [email,setEmail]  = useState("");
-    const [pass, setPass] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState('');
+
+    //const nav = useNavigate();
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === "email") {
+            setEmail(value);
+        } else if (name === "password") {
+            setPassword(value);
+        }
+    };
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError('');
+
+        try {
+            const response = await fetch('http://localhost:4000/login', {
+                method: 'POST',
+                headers: {
+                    'content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email, password,
+                }),
+            });
+            if (response.ok) {
+                //nav("/"); 
+                console.log("okie dokie")
+            }
+            else {
+                const errorData = await response.json();
+
+                setError(errorData.message || 'Invaid credentials !');
+            }
+        }
+        catch (error) {
+            setError('Invalid credentials !')
+        }
+    }
     return (
         <section class="bg-gray-50 dark:bg-gray-900 h-full">
-            <form action="/login" method="POST">
+            <form onSubmit={handleLogin}>
                 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <div
                         class="w-full bg-white rounded-lg shadow dark:border drop-shadow-2xl opacity-90 md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -20,25 +61,22 @@ export const Login = () => {
                                     </svg>
                                 </a>
                             </div>
+
                             <span class="space-y-4 md:space-y-6">
-{/*                                 {{ #if error }}
-                                <div id="error-messages" class="text-red-500">
-                                    {{ error }}
-                                </div>
-                                {{/if}} */}
+
                                 <div>
-                                    <label for="email" class="block mb-2 text-sm font-medium text-white dark:text-white">Your
-                                        email</label>
-                                    <input type="email" name="email" id="email" value={email}
+                                        {error && <p className="text-red-500 mb-2 text-center Email text-sm">{error}</p>}
+                                    <label for="email" class="block mb-3 text-sm font-medium text-white dark:text-white">Email</label>
+                                    <input type="email" name="email" id="email"
                                         class="bg-gray-50 text-white border bg-transparent border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="name@company.com" required=""/>
+                                        placeholder="name@company.com" required="" onChange={handleChange} />
                                 </div>
                                 <div>
                                     <label for="password"
                                         class="block mb-2 text-sm font-medium text-white dark:text-white">Password</label>
-                                    <input value={pass} type="password" name="password" id="password" placeholder="••••••••"
+                                    <input type="password" name="password" id="password" placeholder="••••••••"
                                         class="bg-gray-50 text-white border border-gray-300 bg-transparent sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        required=""/>
+                                        required="" onChange={handleChange} />
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-start">
@@ -51,9 +89,6 @@ export const Login = () => {
                                             <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
                                         </div>
                                     </div>
-                                    {/* <a href="#"
-                                        class="text-sm  text-gray-500 font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot
-                                        password?</a> */}
                                 </div>
                                 <button type="submit"
                                     class="w-full text-white border bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign
