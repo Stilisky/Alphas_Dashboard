@@ -16,6 +16,8 @@ import DateWidget from "../widgets/datecomponent";
 export default function SidebarUser() {
   // const [data, setData] = useState([]);
   const [widgets, setWidgets] = useState([]);
+  const [clickedSpanText, setClickedSpanText] = useState("");
+
 
   useEffect(() => {
     // fetch("http://127.0.0.1:4000/services")
@@ -28,6 +30,12 @@ export default function SidebarUser() {
     //   });
     // fetchWidget("Date and Times")
   }, [])
+
+  const handleWidgetClick = (text) => {
+    setClickedSpanText(text);
+    console.log("Texte du dernier span cliqué :", text);
+  };
+
 
   const fetchWidget = async (name) => {
     switch (name) {
@@ -47,7 +55,7 @@ export default function SidebarUser() {
         };
         break;
       case 'Wealthy Info':
-        
+
         break;
       case 'Dad Jokes':
         try {
@@ -81,8 +89,8 @@ export default function SidebarUser() {
         try {
           const url = "https://exchange-rate-api1.p.rapidapi.com/latest?base=USD";
           const key = "6f1d9c9ae2msh1260823e5d8ea67p109644jsn8968e625a593"
-          const response = await fetch(url, {headers: {'X-RapidAPI-Key': key}})
-          const data =await response.json()
+          const response = await fetch(url, { headers: { 'X-RapidAPI-Key': key } })
+          const data = await response.json()
           const donnee = {
             'rates': data.rates.XOF
           }
@@ -171,21 +179,90 @@ export default function SidebarUser() {
         break;
     }
   }
-
-
   return (
-    <div className="h-screen relative bg-[url('./img/john-schnobrich-2FPjlAyMQTA-unsplash.jpg')] bg-cover">
-      <div className="h-full w-full absolute bg-[#000000a0]">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full container my-24 mx-auto">
-          <Wouldyourathercomponent />
-          <Rateusd />
-          <Jobscomponent />
-          <Btcpricecomponent />
-          <Dadjokecomponent />
-          <Contryiinfocomponent />
-          <Weathercomponent />
+    <div className="h-[1500px] relative bgi bg-cover bg-fixed">
+      <div className="h-full w-full py-24 absolute bg-[#00000071]">
+        <div className="container mx-auto text-center h-fit flex items-center justify-center my-3">
+          <span
+            className="bg-blue-100 text-blue-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">Wealthy Info</a>
+          </span>
+          <span
+            className="bg-gray-100 text-gray-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">DateTimes</a>
+          </span>
+          <span
+            className="bg-red-100 text-red-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">Jobs</a>
+          </span>
+          <span
+            className="bg-green-100 text-green-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">RatesUSD</a>
+          </span>
+          <span
+            className="bg-yellow-100 text-yellow-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">WouldRather</a>
+          </span>
+          <span
+            className="bg-indigo-100 text-indigo-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">Indigo</a>
+          </span>
+          <span
+            className="bg-purple-100 text-purple-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">Dad Jokes</a>
+          </span>
+          <span
+            className="bg-pink-100 text-pink-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">Pink</a>
+          </span>
+        </div>
+        <div className="flex flex-wrap container mx-auto">
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <Wouldyourathercomponent />
+          </div>
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <Rateusd />
+          </div>
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <Jobscomponent />
+          </div>
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <Btcpricecomponent />
+          </div>
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <Dadjokecomponent />
+          </div>
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <Contryiinfocomponent />
+          </div>
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <Weathercomponent />
+          </div>
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <DateWidget />
+          </div>
+          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
+            <DateWidget />
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
