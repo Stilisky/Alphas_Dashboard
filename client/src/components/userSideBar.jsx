@@ -21,11 +21,71 @@ export default function SidebarUser() {
   }, [])
 
 
-  const handleWidgetClick = (text) => {
+  const handleWidgetClick = async (text) => {
     setClickedSpanText(text);
-    console.log("Texte du dernier span cliqué :", text);
-  };
+    let name;
+    switch (text) {
+      case 'Wealthy':
+        name = 'Wealthy Info'
+        break;
 
+      case 'DateTimes':
+        name = 'Date and Times'
+        break;
+
+      case 'Jobs':
+        name = 'Fives remotes jobs'
+        break;
+
+      case 'RatesUSD':
+        name = 'Rates USD XOF'
+        break;
+
+      case 'WouldRather':
+        name = 'Would You Rather'
+        break;
+
+      case 'Affirmation':
+        name = 'Affirmation'
+        break;
+
+      case 'Dad Jokes':
+        name = 'Dad Jokes'
+        break;
+
+      case 'BTC Price':
+        name = 'BTC Price'
+        break;
+      case 'Numbers':
+        name = 'Numbers'
+        break;
+      case 'News':
+        name = 'News'
+        break;
+      case 'Quotes':
+        name = 'Quotes'
+        break;
+      case 'Trivia':
+        name = 'Trivia'
+        break;
+    }
+    // console.log("The name = "+name);
+    const obj = { 'name': name}
+    try {
+      const userid = localStorage.getItem('token')
+      const url = "http://localhost:4000/widget/user/" + userid;      
+      await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj),
+      })
+      updateState()
+    } catch (error) {
+
+    }
+  };
 
   const getWidgets = async () => {
     try {
@@ -82,6 +142,19 @@ export default function SidebarUser() {
       case 'Affirmation':
         comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
         break;
+      case 'Numbers':
+        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+        break;
+      case 'News':
+      comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+      break;
+      case 'Quotes':
+        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+        break;
+      case 'Trivia':
+        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+        break;
+      
     }
   }
   
@@ -93,7 +166,7 @@ export default function SidebarUser() {
             className="bg-blue-100 text-blue-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 w-1/12"
             onClick={(event) => handleWidgetClick(event.target.textContent)}
           >
-            <a href="#">Wealthy Info</a>
+            <a href="#">Wealthy</a>
           </span>
           <span
             className="bg-gray-100 text-gray-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 w-1/12"
@@ -123,7 +196,7 @@ export default function SidebarUser() {
             className="bg-indigo-100 text-indigo-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300 w-1/12"
             onClick={(event) => handleWidgetClick(event.target.textContent)}
           >
-            <a href="#">Indigo</a>
+            <a href="#">Affirmation</a>
           </span>
           <span
             className="bg-purple-100 text-purple-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300 w-1/12"
@@ -135,7 +208,32 @@ export default function SidebarUser() {
             className="bg-pink-100 text-pink-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300 w-1/12"
             onClick={(event) => handleWidgetClick(event.target.textContent)}
           >
-            <a href="#">Pink</a>
+            <a href="#">BTC Price</a>
+          </span>
+
+          <span
+            className="bg-blue-100 text-blue-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">Numbers</a>
+          </span>
+          <span
+            className="bg-gray-100 text-gray-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">News</a>
+          </span>
+          <span
+            className="bg-red-100 text-red-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">Quotes</a>
+          </span>
+          <span
+            className="bg-green-100 text-green-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 w-1/12"
+            onClick={(event) => handleWidgetClick(event.target.textContent)}
+          >
+            <a href="#">olo</a>
           </span>
         </div>
         <div className="flex flex-wrap container mx-auto">

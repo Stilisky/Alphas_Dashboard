@@ -165,13 +165,10 @@ export class AppController {
       return widgets;
   }
 
-  @Get("/addWidget/:name")
-  async addWidget(@Param("name") name: string, @Session() session) {
-    const id = session.userId
-    this.appService.addWidgetToUser(id, name)
-    const user = await this.userService.findUserById(id);
-    const widgets = user.widgets
-    return widgets;
+  @Post("/widget/user/:id")
+  async createWidgetForUser(@Param("id") userid:string, @Body() newWidget: WidgetCreateDto) {
+    const widget = await this.appService.addWidgetToUser(userid, newWidget)
+    return widget
   }
 
   @Get("/duplicate/widget/:widid/user/:userid")
@@ -184,9 +181,7 @@ export class AppController {
 
   @Get("/remove/widget/:widid/user/:userid")
   async removeWidget(@Param("widid") widid: string, @Param("userid") userid: string) {
-    console.log("del in progress")
-    this.appService.DeleteUserWidget(userid, widid);
-    const user = await this.userService.findUserById(userid);
+    const user = await this.userService.removeWidget(userid,widid);
     const widgets = user.widgets
     return widgets;
   }
