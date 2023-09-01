@@ -92,7 +92,7 @@ export default function SidebarUser() {
           const url = "https://exchange-rate-api1.p.rapidapi.com/latest?base=USD";
           const key = "6f1d9c9ae2msh1260823e5d8ea67p109644jsn8968e625a593"
           const response = await fetch(url, {headers: {'X-RapidAPI-Key': key}})
-          const data = response.json()
+          const data =await response.json()
           const donnee = {
             'rates': data.rates.XOF
           }
