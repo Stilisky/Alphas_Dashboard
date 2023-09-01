@@ -7,6 +7,12 @@ import Datetime from '../img/datetime.png'
 export default function DateWidget(props) {
   const [date, setDate] = useState("")
   const [time, setTime] = useState("")
+  const [selectedTimer, setSelectedTimer] = useState("1");
+
+  const handleTimerChange = (event) => {
+      const selectedValue = event.target.value;
+      setSelectedTimer(selectedValue);
+  };
 
   useEffect(() => {
     detDate()
@@ -30,7 +36,7 @@ export default function DateWidget(props) {
   const duplicate = async () => {
     try {
       const userid = localStorage.getItem('token')
-      const url = "http://localhost:4000/duplicate/widget/" + props.widid + "/user/" + userid;      
+      const url = "http://localhost:4000/duplicate/widget/" + props.widid + "/user/" + userid;
       await fetch(url)
       props.updateState()
     } catch (error) {
@@ -42,7 +48,7 @@ export default function DateWidget(props) {
     try {
       const userid = localStorage.getItem('token')
       console.log('react remove comp')
-      const url = "http://localhost:4000/remove/widget/" + props.widid + "/user/" + userid;      
+      const url = "http://localhost:4000/remove/widget/" + props.widid + "/user/" + userid;
       await fetch(url)
       props.updateState()
     } catch (error) {
@@ -82,13 +88,18 @@ export default function DateWidget(props) {
                   </svg>
                 </p>
               </a>
-              <a href="#ggg">
-                <p class="flex items-center font-medium text-gray-800">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
-                  </svg>
-                </p>
-              </a>
+              <select
+                name="timer"
+                id="timer"
+                className='bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:outline-none'
+                value={selectedTimer}
+                onChange={handleTimerChange}
+              >
+                <option value="1">1000 ms</option>
+                <option value="2">2000 ms</option>
+                <option value="3">3000 ms</option>
+                <option value="4">4000 ms</option>
+              </select>
             </div>
           </div>
         </div>
