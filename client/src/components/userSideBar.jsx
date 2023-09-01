@@ -3,6 +3,10 @@
 
 import { useEffect, useState } from "react";
 import Widget from "./widget";
+import Weathercomponent from "../widgets/weathercomponent";
+import Contryiinfocomponent from "../widgets/contryiinfocomponent";
+import Dadjokecomponent from "../widgets/dadjokecomponent";
+
 import DateWidget from "../widgets/datecomponent";
 
 export default function SidebarUser() {
@@ -187,8 +191,9 @@ export default function SidebarUser() {
         <DateWidget widgetid={"test de props"}/>
         <Widget/>
         <Widget/>
-        <Widget/>
-        <Widget/>
+        <Dadjokecomponent/>
+        <Contryiinfocomponent/>
+        <Weathercomponent/>
       </div>
     </div>
   );
