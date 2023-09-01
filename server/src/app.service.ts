@@ -54,13 +54,12 @@ export class AppService {
     return data;
   }
 
-  async addWidgetToUser(id: string, name:string) {
-    const user = await this.userService.findUserById(id);
-    const obj = new WidgetCreateDto();
-    obj.name = name;
-    const widget = await this.widgetService.createWidget(obj)
+  async addWidgetToUser(userid: string, newWid: WidgetCreateDto) {
+    const user = await this.userService.findUserById(userid);
+    const widget = await this.widgetService.createWidget(newWid)
     user.widgets.push(widget)
-    this.userService.updateUser(id, user)
+    this.userService.updateUser(userid, user)
+    return widget
   }
 
   async DeleteUserWidget(id: string, widid:string) {

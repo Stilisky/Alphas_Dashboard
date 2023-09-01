@@ -7,10 +7,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import * as bcrypt from 'bcrypt';
+import { WidgetService } from 'src/widgets/widget.service';
 
 @Injectable()
 export class UserService {
-   constructor(@InjectModel(User.name) private readonly userModel : Model<User>) {}
+   constructor(@InjectModel(User.name) private readonly userModel : Model<User>, 
+   private readonly widgetService: WidgetService,) {}
 
    async findAllUsers() {
       return await this.userModel.find().exec()
@@ -115,4 +117,13 @@ async toggleUserRole(userId: string): Promise<User> {
                 throw new NotFoundException('Wrong password !');
             }
     }
+
+    async removeWidget(userid: string, widid:string) {
+        await this.widgetService.deleteWidget(widid)
+        return this.userModel.findByIdAndUpdate(
+            userid,
+            {$pull: {widgets: widid}},
+            {new: true}
+        ).populate("widgets")
+      }
 }
