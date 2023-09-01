@@ -15,7 +15,7 @@ export class Widget {
    @Prop()
    description: string
 
-   @Prop()
+   @Prop({default: "3"})
    timer: string
 }
 

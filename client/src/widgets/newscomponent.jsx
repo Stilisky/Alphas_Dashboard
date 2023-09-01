@@ -92,9 +92,9 @@ const Newscomponent = (props) => {
                                 onChange={handleTimerChange}
                             >
                                 <option value="1">1000 ms</option>
-                                <option value="2">2000 ms</option>
-                                <option value="3">3000 ms</option>
-                                <option value="4">4000 ms</option>
+                                <option value="2">1 min</option>
+                                <option value="3">2 min</option>
+                                <option value="4">5 min</option>
                             </select>
                         </div>
                     </div>

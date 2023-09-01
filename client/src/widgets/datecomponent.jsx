@@ -8,15 +8,53 @@ export default function DateWidget(props) {
   const [date, setDate] = useState("")
   const [time, setTime] = useState("")
   const [selectedTimer, setSelectedTimer] = useState("1");
+  const [inter, setInter] = useState();
+  const [timer, setTimer] = useState();
 
   const handleTimerChange = (event) => {
       const selectedValue = event.target.value;
       setSelectedTimer(selectedValue);
   };
 
+  const componentGenerate = (widtimer) => {
+    let interval;
+    switch (interval) {
+      case '1000 ms':
+        interval = 1000
+        break;
+      case '1 min':
+        interval = 60000
+      break;
+      
+      case '2 min':
+        interval = 120000
+      break;
+
+      case '5 min':
+        interval = 300000
+      break;
+
+      default:
+        interval = 180000
+        break;
+      
+    }
+    setTimer(interval)
+  }
+  
   useEffect(() => {
     detDate()
+    setInter(setInterval(() => {
+      detDate()
+    }, props.time))
+    return(
+      componentDelete()
+    )
   }, [])
+
+  const componentDelete = () => {
+    clearInterval(inter)
+  }
 
   const detDate = () => {
     const ts = Date.now();
@@ -96,9 +134,9 @@ export default function DateWidget(props) {
                 onChange={handleTimerChange}
               >
                 <option value="1">1000 ms</option>
-                <option value="2">2000 ms</option>
-                <option value="3">3000 ms</option>
-                <option value="4">4000 ms</option>
+                <option value="2">1 min</option>
+                <option value="3">2 min</option>
+                <option value="4">5 min</option>
               </select>
             </div>
           </div>

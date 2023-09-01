@@ -19,6 +19,8 @@ export default function SidebarUser() {
   // const [data, setData] = useState([]);
   const [widgets, setWidgets] = useState([]);
   const [clickedSpanText, setClickedSpanText] = useState("");
+  const [inter, setInter] = useState();
+  const [child, updateChild] = useState(false);
 
 
   useEffect(() => {
@@ -141,7 +143,7 @@ export default function SidebarUser() {
         break;
 
       case 'Date and Times':
-        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState} refresh={child}/>
         break;
 
       case 'Affirmation':
@@ -161,6 +163,37 @@ export default function SidebarUser() {
         break;
       
     }
+  }
+
+  const componentGenerate = () => {
+    let interval;
+    switch (interval) {
+      case '1000 ms':
+        interval = 1000
+        break;
+      case '1 min':
+        interval = 60000
+      break;
+      
+      case '2 min':
+        interval = 120000
+      break;
+
+      case '5 min':
+        interval = 300000
+      break;
+
+      default:
+        interval = 180000
+        break;
+    }
+    setInter(setInterval(() => {
+      updateChild(true)
+    }, 5000))
+  }
+
+  const componentDelete = () => {
+    clearInterval(inter)
   }
   
   return (
@@ -214,13 +247,6 @@ export default function SidebarUser() {
             onClick={(event) => handleWidgetClick(event.target.textContent)}
           >
             <a href="#">BTC Price</a>
-          </span>
-
-          <span
-            className="bg-blue-100 text-blue-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 w-1/12"
-            onClick={(event) => handleWidgetClick(event.target.textContent)}
-          >
-            <a href="#">Numbers</a>
           </span>
           <span
             className="bg-gray-100 text-gray-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 w-1/12"
