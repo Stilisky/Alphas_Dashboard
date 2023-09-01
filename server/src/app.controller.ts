@@ -9,6 +9,7 @@ import {
   Delete,
   Param,
   Session,
+  Put,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { AppService } from './app.service';
@@ -105,6 +106,13 @@ export class AppController {
     return services;
   }
 
+
+  @Get('/allusers')
+  async getUsers() {
+    const Allusers = await this.userService.findAllUsers()
+    return Allusers;
+  }
+
   @Post("/services")
   async createService(@Body() newServ) {
     const serv = await this.serviceService.createUserService(newServ)
@@ -120,6 +128,21 @@ export class AppController {
   async createUser(@Body() newServ) {
     const serv = await this.userService.createUser(newServ)
     return serv;
+  }
+
+  @Put('/promote/:userId')
+  async promoteUser(@Param('userId') userId: string) {
+    try {
+      const updatedUser = await this.userService.toggleUserRole(userId);
+      return updatedUser;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Delete('/users/:id')
+  async deleteUser(@Param('id') id: string) {
+    this.userService.deleteUser(id);
   }
 
   @Get("/widget/data/:id")
@@ -159,6 +182,18 @@ export class AppController {
     const user = await this.userService.findUserById(id);
     const widgets = user.widgets
     return widgets;
+  }
+
+  @Get("/users/data/:id")
+  async userData(@Param("id") id:string) {
+    const userData = await this.userService.findUserById(id);
+    return userData;
+  }
+
+  @Put('/update/users/data/:id')
+  async updateAccountInfo(@Param('id') id: string, @Body() updateData) {
+    const updateUser = this.userService.updateUser(id, updateData);
+    return updateUser;
   }
 
 }
