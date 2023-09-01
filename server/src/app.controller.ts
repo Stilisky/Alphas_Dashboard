@@ -81,6 +81,12 @@ export class AppController {
     return widget
   }
 
+  @Post("/widgets")
+  async createUserWidget(@Body() newWidget: WidgetCreateDto) {
+    const widget = await this.widgetService.createWidget(newWidget);
+    return widget
+  }
+
   @Get('/widgets/:id')
   async findWidget(@Param('id') id: string) {
     const widget = await this.widgetService.findWidget(id);
@@ -171,11 +177,18 @@ export class AppController {
     return widgets;
   }
 
-  @Get("/duplicate/:widid")
-  async duplicate(@Param("widid") widid: string, @Session() session) {
-    const id = session.userId;
-    this.appService.duplicateWidget(id, widid);
-    const user = await this.userService.findUserById(id);
+  @Get("/duplicate/widget/:widid/user/:userid")
+  async duplicate(@Param("widid") widid: string, @Param("userid") userid: string) {
+    this.appService.duplicateWidget(userid, widid);
+    const user = await this.userService.findUserById(userid);
+    const widgets = user.widgets
+    return widgets;
+  }
+
+  @Get("/remove/widget/:widid/user/:userid")
+  async removeWidget(@Param("widid") widid: string, @Param("userid") userid: string) {
+    this.appService.DeleteUserWidget(userid, widid);
+    const user = await this.userService.findUserById(userid);
     const widgets = user.widgets
     return widgets;
   }
