@@ -11,6 +11,7 @@ import Jobscomponent from "../widgets/jobscomponent";
 import Rateusd from "../widgets/rateusd";
 import Wouldyourathercomponent from "../widgets/wouldyourathercomponent";
 
+import DateWidget from "../widgets/datecomponent";
 
 export default function SidebarUser() {
   // const [data, setData] = useState([]);
@@ -26,7 +27,7 @@ export default function SidebarUser() {
     //   .catch(error => {
     //     console.error('error:' + error)
     //   });
-    fetchWidget("Date and Times")
+    // fetchWidget("Date and Times")
   }, [])
 
   const fetchWidget = async (name) => {
