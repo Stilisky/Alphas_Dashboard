@@ -9,6 +9,11 @@ import Jobscomponent from "../widgets/jobscomponent";
 import Rateusd from "../widgets/rateusd";
 import Wouldyourathercomponent from "../widgets/wouldyourathercomponent";
 import DateWidget from "../widgets/datecomponent";
+import Affirmationcomponent from "../widgets/affirmationcomponent";
+import Mathcomponent from "../widgets/mathcomponent";
+import Newscomponent from "../widgets/newscomponent";
+import Culturecomponent from "../widgets/culturecomponent";
+import Quotecomponent from "../widgets/quotecomponent";
 
 export default function SidebarUser() {
   // const [data, setData] = useState([]);
@@ -140,19 +145,19 @@ export default function SidebarUser() {
         break;
 
       case 'Affirmation':
-        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+        comoponentToDisplay = <Affirmationcomponent widid={widid} updateState={updateState}/>
         break;
       case 'Numbers':
-        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+        comoponentToDisplay = <Mathcomponent widid={widid} updateState={updateState}/>
         break;
       case 'News':
-      comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+      comoponentToDisplay = <Newscomponent widid={widid} updateState={updateState}/>
       break;
       case 'Quotes':
-        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+        comoponentToDisplay = <Quotecomponent widid={widid} updateState={updateState}/>
         break;
       case 'Trivia':
-        comoponentToDisplay = <DateWidget widid={widid} updateState={updateState}/>
+        comoponentToDisplay = <Culturecomponent widid={widid} updateState={updateState}/>
         break;
       
     }
@@ -233,7 +238,7 @@ export default function SidebarUser() {
             className="bg-green-100 text-green-800 text-base font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 w-1/12"
             onClick={(event) => handleWidgetClick(event.target.textContent)}
           >
-            <a href="#">olo</a>
+            <a href="#">Trivia</a>
           </span>
         </div>
         <div className="flex flex-wrap container mx-auto">
