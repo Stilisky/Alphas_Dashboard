@@ -72,5 +72,6 @@ export class AppController {
     const data = await this.appService.getData(widget);
     return data;
   }
-
+  
+  
 }
