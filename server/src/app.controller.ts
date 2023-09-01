@@ -61,7 +61,6 @@ export class AppController {
       session['userId'] = user._id;
       session['name'] = user.username;
       session['email'] = user.email;
-      console.log("connect")
       return user._id;
     }
   }
@@ -78,6 +77,12 @@ export class AppController {
 
   @Post("/widgets")
   async createWidget(@Body() newWidget: WidgetCreateDto) {
+    const widget = await this.widgetService.createWidget(newWidget);
+    return widget
+  }
+
+  @Post("/widgets")
+  async createUserWidget(@Body() newWidget: WidgetCreateDto) {
     const widget = await this.widgetService.createWidget(newWidget);
     return widget
   }
@@ -152,18 +157,12 @@ export class AppController {
     return data;
   }
 
-  @Get("/dashboard")
-  async dashboard(@Session() session) {
-    console.log(session.userId)
-    if(session.userId) {
-      const id = session.userId;
+  @Get("/dashboard/:id")
+  async dashboard(@Param("id") id:string) {
       const user = await this.userService.findUserById(id);
       const widgets = user.widgets
-      console.log(widgets)
+      // console.log(widgets)
       return widgets;
-    } else {
-      console.log("error connect")
-    }
   }
 
   @Get("/addWidget/:name")
@@ -175,11 +174,19 @@ export class AppController {
     return widgets;
   }
 
-  @Get("/duplicate/:widid")
-  async duplicate(@Param("widid") widid: string, @Session() session) {
-    const id = session.userId;
-    this.appService.duplicateWidget(id, widid);
-    const user = await this.userService.findUserById(id);
+  @Get("/duplicate/widget/:widid/user/:userid")
+  async duplicate(@Param("widid") widid: string, @Param("userid") userid: string) {
+    this.appService.duplicateWidget(userid, widid);
+    const user = await this.userService.findUserById(userid);
+    const widgets = user.widgets
+    return widgets;
+  }
+
+  @Get("/remove/widget/:widid/user/:userid")
+  async removeWidget(@Param("widid") widid: string, @Param("userid") userid: string) {
+    console.log("del in progress")
+    this.appService.DeleteUserWidget(userid, widid);
+    const user = await this.userService.findUserById(userid);
     const widgets = user.widgets
     return widgets;
   }

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -32,8 +31,9 @@ export const Login = () => {
                 }),
             });
             if (response.ok) {
-                console.log(response)
-                navigate("/")
+                const token = await response.json();
+                localStorage.setItem('token', token)
+                navigate("/dashboard")
             }
             else {
                 const errorData = await response.json();

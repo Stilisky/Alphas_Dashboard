@@ -7,3 +7,7 @@
     top: 337px;
     left: 201px;
 }
+
+.bgi{
+    background-image: url('./img/hero.jpg');
+}
