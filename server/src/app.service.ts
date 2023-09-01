@@ -68,6 +68,7 @@ export class AppService {
     const widget = await this.widgetService.findWidget(widid);
     const widgets = user.widgets
     const newWidgets = [];
+    this.widgetService.deleteWidget(widid)
     widgets.forEach(element => {
       if(element != widget){
         newWidgets.push(element)

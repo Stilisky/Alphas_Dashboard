@@ -1,17 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import contry from '../img/contry.png'
-import { useNavigate } from 'react-router-dom'
 
-const Contryiinfocomponent = (props) => {
+const Afficomponent = (props) => {
 
-    const navigate = useNavigate()
+    const [affir, setAffir] = useState("")
 
+    useEffect( () => {
+        fetchAffir()
+    }, []);
+
+    const fetchAffir = async () => {
+        try {
+            const url = "https://www.affirmations.dev/";
+            const response = await fetch(url)
+            const data = await response.json()
+            setAffir(data.affirmation)
+        } catch (error) {
+            console.error('error:' + error)
+        };
+    }
     const duplicate = async () => {
         try {
           const userid = localStorage.getItem('token')
           const url = "http://localhost:4000/duplicate/widget/" + props.widid + "/user/" + userid;      
-          const response = await fetch(url)
-          if (response.ok) {navigate("/dashboard")}
+          await fetch(url)
+          props.updateState()
         } catch (error) {
           
         }
@@ -21,8 +34,8 @@ const Contryiinfocomponent = (props) => {
         try {
             const userid = localStorage.getItem('token')
             const url = "http://localhost:4000/remove/widget/" + props.widid + "/user/" + userid;      
-            const response = await fetch(url)
-            if (response.ok) {navigate("/dashboard")}
+            await fetch(url)
+            props.updateState()
         } catch (error) {
             
         }
@@ -76,4 +89,4 @@ const Contryiinfocomponent = (props) => {
     )
 }
 
-export default Contryiinfocomponent
+export default Afficomponent

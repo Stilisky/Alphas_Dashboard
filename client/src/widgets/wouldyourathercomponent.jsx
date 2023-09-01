@@ -27,8 +27,8 @@ const Wouldyourathercomponent = (props) => {
         try {
           const userid = localStorage.getItem('token')
           const url = "http://localhost:4000/duplicate/widget/" + props.widid + "/user/" + userid;      
-          const response = await fetch(url)
-          if (response.ok) {navigate("/dashboard")}
+          await fetch(url)
+          props.updateState()
         } catch (error) {
           
         }
@@ -38,8 +38,8 @@ const Wouldyourathercomponent = (props) => {
         try {
             const userid = localStorage.getItem('token')
             const url = "http://localhost:4000/remove/widget/" + props.widid + "/user/" + userid;      
-            const response = await fetch(url)
-            if (response.ok) {navigate("/dashboard")}
+            await fetch(url)
+            props.updateState()
         } catch (error) {
             
         }

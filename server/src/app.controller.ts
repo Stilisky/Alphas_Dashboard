@@ -157,15 +157,12 @@ export class AppController {
     return data;
   }
 
-  @Get("/dashboard")
-  async dashboard(@Session() session) {
-    if(session.userId) {
-      const id = session.userId;
+  @Get("/dashboard/:id")
+  async dashboard(@Param("id") id:string) {
       const user = await this.userService.findUserById(id);
       const widgets = user.widgets
+      // console.log(widgets)
       return widgets;
-    } else {
-    }
   }
 
   @Get("/addWidget/:name")
@@ -187,6 +184,7 @@ export class AppController {
 
   @Get("/remove/widget/:widid/user/:userid")
   async removeWidget(@Param("widid") widid: string, @Param("userid") userid: string) {
+    console.log("del in progress")
     this.appService.DeleteUserWidget(userid, widid);
     const user = await this.userService.findUserById(userid);
     const widgets = user.widgets
