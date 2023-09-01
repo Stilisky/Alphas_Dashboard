@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import joke from '../img/joke.png'
 import { useNavigate } from 'react-router-dom'
 
 const Dadjokecomponent = (props) => {
 
     const navigate = useNavigate()
+    const [dad, setDad] = useState("")
+    const [setup, setSetup] = useState("")
+
+    useEffect( () => {
+        fetchDad()
+    }, []);
+
+    const fetchDad = async () => {
+        try {
+            const url = "https://dad-jokes.p.rapidapi.com/random/joke";
+            const key = "6f1d9c9ae2msh1260823e5d8ea67p109644jsn8968e625a593"
+            const response = await fetch(url, { headers: { 'X-RapidAPI-Key': key } })
+            const data = await response.json()
+            setDad(data.body[0].punchline)
+            setSetup(data.body[0].setup)
+        } catch (error) {
+            console.error('error:' + error)
+        };
+    }
 
     const duplicate = async () => {
         try {
@@ -34,11 +53,10 @@ const Dadjokecomponent = (props) => {
                 <div class="shadow p-4 rounded-lg bg-white flex flex-col items-center">
                     <div className='flex items-center justify-between'>
                         <img src={joke} alt="joke" className='h-[50px]' />
-                        <span>Setup</span>
+                        <span>{setup}</span>
                     </div>
                     <div className='h-[190px] flex items-center justify-center'>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore unde harum quasi impedit sunt
-                            repellendus ad, beatae quae pariatur, cupiditate itaque aliquam porro consequatur dicta officia repellat odio, neque maiores.</p>
+                        <p>{dad}</p>
                     </div>
 
                     <div class="grid mt-8">

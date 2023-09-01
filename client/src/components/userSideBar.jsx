@@ -48,20 +48,7 @@ export default function SidebarUser() {
         };
         break;
       case 'Wealthy Info':
-        try {
-          const url = "https://weatherapi-com.p.rapidapi.com/current.json?q=6.37,2.45"
-          const key = "6f1d9c9ae2msh1260823e5d8ea67p109644jsn8968e625a593"
-          const response = await fetch(url, { headers: { 'X-RapidAPI-Key': key } })
-          const data = response.json()
-          const donnee = {
-            'City': data.location.name,
-            'temp': data.current.temp_c,
-            'condition': data.current.condition.text,
-          }
-          return donnee
-        } catch (error) {
-          console.error('error:' + error)
-        };
+        
         break;
       case 'Dad Jokes':
         try {

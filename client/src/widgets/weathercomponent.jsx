@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import weather from '../img/weather.png'
 import { useNavigate } from 'react-router-dom'
 
 const Weathercomponent = (props) => {
     const navigate = useNavigate()
+    const [city, setCity] = useState("")
+    const [temp, setTemp] = useState("")
+    const [cond, setCond] = useState("")
+
+    useEffect( () => {
+        fetchWeather()
+    });
+
+    const fetchWeather = async () => {
+        try {
+            const url = "https://weatherapi-com.p.rapidapi.com/current.json?q=6.37,2.45"
+            const key = "6f1d9c9ae2msh1260823e5d8ea67p109644jsn8968e625a593"
+            const response = await fetch(url, { headers: { 'X-RapidAPI-Key': key } })
+            const data =await response.json()
+            setCity(data.location.name)
+            setTemp(data.current.temp_c)
+            setCond(data.current.condition.text)
+        } catch (error) {
+            console.error('error:' + error)
+        };
+    }
+
     const duplicate = async () => {
         try {
           const userid = localStorage.getItem('token')
@@ -32,9 +54,9 @@ const Weathercomponent = (props) => {
                     <img src={weather} alt="weather" className='h-[200px]' />
 
                     <div className='flex space-x-2 mt-5'>
-                        <span>City: ;</span>
-                        <span>Temp: ;</span>
-                        <span>Condition: </span>
+                        <span>City: {city};</span>
+                        <span>Temp: {temp};</span>
+                        <span>Condition: {cond}</span>
 
                     </div>
 
