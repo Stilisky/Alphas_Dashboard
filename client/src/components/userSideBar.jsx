@@ -18,7 +18,7 @@ export default function SidebarUser() {
     //   .catch(error => {
     //     console.error('error:' + error)
     //   });
-    fetchWidget()
+    fetchWidget("Date and Times")
   }, [])
 
   const fetchWidget = async (name) => {
@@ -106,6 +106,7 @@ export default function SidebarUser() {
           const donnee = {
             'price': data.price
           }
+          console.log(data)
           return donnee
         } catch (error) {
           
@@ -167,6 +168,7 @@ export default function SidebarUser() {
             "date": dateofday,
             "time": theHour
           }
+          console.log(donnee)
           return donnee
         } catch (error) {
           

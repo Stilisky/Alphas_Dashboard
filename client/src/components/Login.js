@@ -32,8 +32,8 @@ export const Login = () => {
                 }),
             });
             if (response.ok) {
-                console.log(response)
-                // navigate("/dashboard")
+                console.log(response.json())
+                navigate("/dashboard")
             }
             else {
                 const errorData = await response.json();
