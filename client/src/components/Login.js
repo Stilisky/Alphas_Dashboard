@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -6,7 +7,7 @@ export const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState('');
 
-    //const nav = useNavigate();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,8 +32,8 @@ export const Login = () => {
                 }),
             });
             if (response.ok) {
-                //nav("/"); 
-                console.log("okie dokie")
+                console.log(response)
+                // navigate("/dashboard")
             }
             else {
                 const errorData = await response.json();

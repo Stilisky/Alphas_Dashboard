@@ -1,8 +1,11 @@
 
 import React, { useState } from 'react';
-//import { Link } from 'react-router-dom';
+import { Navigate, Route, useNavigate } from 'react-router-dom';
+import Login from './Login';
 
 export const Register = () => {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -39,7 +42,8 @@ export const Register = () => {
                 body: JSON.stringify(formData),
             });
             if (response.ok) {
-                //history.push('/login')
+                console.log(response)
+                navigate("/login")
             } else {
                 const errorData = await response.json();
 

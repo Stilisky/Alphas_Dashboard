@@ -17,7 +17,7 @@ export class UserService {
    }
 
    async findUserById(id: string) {
-      const user = (await this.userModel.findById(id).exec()).populate("services")
+      const user = (await (await this.userModel.findById(id).exec()).populate("services")).populate("widgets")
       return user
    }
 
@@ -45,7 +45,7 @@ export class UserService {
                 password: hashedPassword,
             });
             await newUser.save();
-            console.log(newUser);
+            // console.log(newUser);
             return newUser;
         } catch (error) {
             // Handle hashing error or database operation error here
