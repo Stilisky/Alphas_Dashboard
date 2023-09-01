@@ -3,6 +3,10 @@
 
 import { useEffect, useState } from "react";
 import Widget from "./widget";
+import Weathercomponent from "../widgets/weathercomponent";
+import Contryiinfocomponent from "../widgets/contryiinfocomponent";
+import Dadjokecomponent from "../widgets/dadjokecomponent";
+
 
 export default function SidebarUser() {
   // const [data, setData] = useState([]);
@@ -185,9 +189,9 @@ export default function SidebarUser() {
         <Widget/>
         <Widget/>
         <Widget/>
-        <Widget/>
-        <Widget/>
-        <Widget/>
+        <Dadjokecomponent/>
+        <Contryiinfocomponent/>
+        <Weathercomponent/>
       </div>
     </div>
   );
