@@ -6,7 +6,8 @@ import { UserDashboard } from './components/userdashboard';
 import Login from './components/Login';
 import Register from './components/Register';
 import Edithuser from './admin/page/Edithuser';
-import ServInterface from './components/serviceinterface';
+import Logout from './components/logout';
+
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
       <Route path='/dashboard' element={<UserDashboard />}/>
       <Route path='/login' element={<Login />}/>
       <Route path='/register' element={<Register />}/>
-      <Route path='/update-user/:id' element={<Edithuser />} /> {/* Nouvelle route pour la mise à jour */}
-      <Route path='/setting' element={<ServInterface />}/>
+      <Route path='/update-user/:id' element={<Edithuser />} />
+      <Route path='/logout' element={<Logout/>} />
 
     </Routes>
   );
