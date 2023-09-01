@@ -42,7 +42,6 @@ export const Register = () => {
                 body: JSON.stringify(formData),
             });
             if (response.ok) {
-                console.log(response)
                 navigate("/login")
             } else {
                 const errorData = await response.json();

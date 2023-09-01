@@ -58,10 +58,8 @@ async toggleUserRole(userId: string): Promise<User> {
                 password: hashedPassword,
             });
             await newUser.save();
-            // console.log(newUser);
             return newUser;
         } catch (error) {
-            // Handle hashing error or database operation error here
             throw new BadRequestException('User creation failed');
         }
     }

@@ -10,7 +10,6 @@ const Userslist = () => {
         fetch('http://localhost:4000/allusers')
             .then(response => response.json())
             .then(data => {
-                console.log('Fetched data:', data);
                 setUsers(data);
             })
             .catch(error => console.error('Error fetching users:', error));
@@ -22,7 +21,6 @@ const Userslist = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('User deleted:', data);
                 const updatedUsers = users.filter(user => user._id !== userId);
                 setUsers(updatedUsers);
                 window.location.reload()
@@ -47,7 +45,6 @@ const Userslist = () => {
         })
             .then(response => response.json())
             .then(updatedUser => {
-                console.log('User role updated:', updatedUser);
                 setUsers(prevUsers =>
                     prevUsers.map(user =>
                         user._id === userId ? { ...user, isAdmin: newRole } : user

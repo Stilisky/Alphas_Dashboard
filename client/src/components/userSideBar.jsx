@@ -13,7 +13,6 @@ export default function SidebarUser() {
     //   .then(response => response.json())
     //   .then(data => {
     //     setWidgets(data);
-    //     // console.log(widgets)
     //   })
     //   .catch(error => {
     //     console.error('error:' + error)

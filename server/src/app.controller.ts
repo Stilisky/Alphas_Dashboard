@@ -61,7 +61,6 @@ export class AppController {
       session['userId'] = user._id;
       session['name'] = user.username;
       session['email'] = user.email;
-      console.log("connect")
       return user._id;
     }
   }
@@ -154,15 +153,12 @@ export class AppController {
 
   @Get("/dashboard")
   async dashboard(@Session() session) {
-    console.log(session.userId)
     if(session.userId) {
       const id = session.userId;
       const user = await this.userService.findUserById(id);
       const widgets = user.widgets
-      console.log(widgets)
       return widgets;
     } else {
-      console.log("error connect")
     }
   }
 

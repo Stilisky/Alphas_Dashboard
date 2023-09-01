@@ -18,7 +18,6 @@ const Edithuser = () => {
         fetch(`http://localhost:4000/users/data/${id}`)
             .then(response => response.json())
             .then(data => {
-                console.log('Fetched user data:', data);
                 setUser(data);
             })
             .catch(error => console.error('Error fetching user data:', error));
@@ -42,7 +41,6 @@ const Edithuser = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('User updated:', data);
                 setUser(updatedUser);
             })
             .catch(error => console.error('Error updating user:', error));
