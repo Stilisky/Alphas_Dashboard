@@ -128,6 +128,11 @@ export class AppController {
     }
   }
 
+  @Delete('/users/:id')
+  async deleteUser(@Param('id') id: string) {
+    this.userService.deleteUser(id);
+  }
+
   @Get("/widget/data/:id")
   async widgetdata(@Param("id") id:string) {
     const widget = await this.widgetService.findWidget(id);
@@ -143,7 +148,8 @@ export class AppController {
 
   @Put('/update/users/data/:id')
   async updateAccountInfo(@Param('id') id: string, @Body() updateData) {
-    this.userService.updateUser(id, updateData)
+    const updateUser = this.userService.updateUser(id, updateData);
+    return updateUser;
   }
 
 }

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Importez useParams
+import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import AdminNav from '../components/adminNav';
 import Mainadmin from '../components/mainadmin';
 import Stat from '../components/stat';
 
 const Edithuser = () => {
-    const { id } = useParams(); // Récupérez l'ID depuis l'URL
+    const { id } = useParams();
+    
 
     const [user, setUser] = useState({
         username: '',

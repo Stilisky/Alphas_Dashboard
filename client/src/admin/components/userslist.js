@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
+
 const Userslist = () => {
     const [users, setUsers] = useState([]);
 
@@ -15,23 +16,27 @@ const Userslist = () => {
             .catch(error => console.error('Error fetching users:', error));
     }, []);
 
-    const handleDeleteUser = (userId) => {
+    const handleDeleteUser = (userId) => {    
         fetch(`http://localhost:4000/users/${userId}`, {
             method: 'DELETE'
         })
             .then(response => response.json())
             .then(data => {
                 console.log('User deleted:', data);
-                setUsers(prevUsers => prevUsers.filter(user => user._id !== userId));
+                const updatedUsers = users.filter(user => user._id !== userId);
+                setUsers(updatedUsers);
+                window.location.reload()
             })
             .catch(error => console.error('Error deleting user:', error));
     };
+    
+    
 
 
     const handlePromoteUser = (userId) => {
         const updatedUser = users.find(user => user._id === userId);
 
-        const newRole = !updatedUser.isAdmin; // Inverse le rôle actuel
+        const newRole = !updatedUser.isAdmin; 
 
         fetch(`http://localhost:4000/promote/${userId}`, {
             method: 'PUT',
