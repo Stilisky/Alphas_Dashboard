@@ -2,9 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Widget from "./widget";
 import Weathercomponent from "../widgets/weathercomponent";
-import Contryiinfocomponent from "../widgets/affir";
 import Dadjokecomponent from "../widgets/dadjokecomponent";
 import Btcpricecomponent from "../widgets/btcpricecomponent";
 import Jobscomponent from "../widgets/jobscomponent";
@@ -86,19 +84,8 @@ export default function SidebarUser() {
         break;
     }
   }
+  
   return (
-    <div className="h-screen relative bg-[url('./img/john-schnobrich-2FPjlAyMQTA-unsplash.jpg')] bg-cover">
-      <div className="h-full w-full absolute bg-[#000000a0]">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full container my-24 mx-auto">
-          {widgets.map((widget) => {
-            getWidgetComponent(widget._id, widget.name)
-            return (
-              <span key={widget._id}>
-                {comoponentToDisplay}
-              </span>
-            )            
-          })}
-        </div>
     <div className="h-[1500px] relative bgi bg-cover bg-fixed">
       <div className="h-full w-full py-24 absolute bg-[#00000071]">
         <div className="container mx-auto text-center h-fit flex items-center justify-center my-3">
@@ -152,33 +139,15 @@ export default function SidebarUser() {
           </span>
         </div>
         <div className="flex flex-wrap container mx-auto">
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <Wouldyourathercomponent />
-          </div>
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <Rateusd />
-          </div>
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <Jobscomponent />
-          </div>
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <Btcpricecomponent />
-          </div>
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <Dadjokecomponent />
-          </div>
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <Contryiinfocomponent />
-          </div>
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <Weathercomponent />
-          </div>
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <DateWidget />
-          </div>
-          <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6">
-            <DateWidget />
-          </div>
+          
+          {widgets.map((widget) => {
+            getWidgetComponent(widget._id, widget.name)
+            return (
+              <div className="p-4 h-fit w-1/4 sm:mb-0 mb-6" key={widget._id}>
+                {comoponentToDisplay}
+              </div>
+            )            
+          })}
         </div>
       </div>
     </div>
