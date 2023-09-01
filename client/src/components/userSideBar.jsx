@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Widget from "./widget";
+import DateWidget from "../widgets/datecomponent";
 
 export default function SidebarUser() {
   // const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ export default function SidebarUser() {
     //   .catch(error => {
     //     console.error('error:' + error)
     //   });
-    fetchWidget("Date and Times")
+    // fetchWidget("Date and Times")
   }, [])
 
   const fetchWidget = async (name) => {
@@ -183,7 +184,7 @@ export default function SidebarUser() {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full bg-black">
         <Widget/>
         <Widget/>
-        <Widget/>
+        <DateWidget widgetid={"test de props"}/>
         <Widget/>
         <Widget/>
         <Widget/>
